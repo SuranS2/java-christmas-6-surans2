@@ -1,26 +1,90 @@
 package christmas.menu;
 
+import christmas.menu.MenuInterface;
+// enum 인터페이스?
+
 public enum Appetizer {
+    APPETIZER_SALAD("시저샐러드", 8_000, 1),
+    APPETIZER_SOUP("양송이수프", 6_000, 2),
+    APPETIZER_TAPAS("타파스", 5_500, 3);
+    private final String foodName;
+    private final int foodPrice;
+    private final int foodIndex;
 
-//    appetizer price, index
-//    시저샐러드(8,000) 1
-//    양송이수프(6,000) 2
-//    타파스(5,500) 3
+    public String getAppetizerName() {
+        return foodName ;
+    }
+    public int getAppetizerPrice() {
+        return foodPrice ;
+    }
+    public int getAppetizerIndex() {
+        return foodIndex ;
+    }
 
 
-//    main dish
-//    티본스테이크(55,000) 4
-//    바비큐립(54,000) 5
-//    해산물파스타(35,000) 6
-//    크리스마스파스타(25,000) 7
 
-//    dessert
-//    초코케이크(15,000) 8
-//    아이스크림(5,000) 9
+    Appetizer(String foodName, int foodPrice, int foodIndex) {
+        this.foodName = foodName;
+        this.foodPrice = foodPrice;
+        this.foodIndex = foodIndex;
+    }
 
-//    drink
-//    레드와인(60,000) 10
-//    샴페인(25,000) 11
-//    제로콜라(3,000) 12
+//    public static LottoRank getMatchedLottoRank(AnswerLotto answerLotto, Lotto lotto) {
+//        int matchedNumberCount = countMatchedNumber(answerLotto, lotto);
+//        boolean isBonusNumber = isNumberSameAsBonusNumber(answerLotto, lotto);
+//
+//        return LottoRank.getMatchedLottoRank(matchedNumberCount, isBonusNumber);
+//    }
+//
+//    private static LottoRank getMatchedLottoRank(int matchedNumberCount, boolean isBonusNumber) {
+//        return Arrays.stream(LottoRank.values())
+//                .filter(lottoRank -> lottoRank.matchingCondition.test(matchedNumberCount, isBonusNumber))
+//                .findAny()
+//                .orElse(NOTHING);
+//    }
+//
+//    private static int countMatchedNumber(AnswerLotto answerLotto, Lotto lotto) {
+//        int matchedNumberCount = 0;
+//
+//        for (int index = 0; index < lotto.getSize(); index++) {
+//            if (answerLotto.isContain(lotto.getNumber(index))) {
+//                matchedNumberCount++;
+//            }
+//        }
+//
+//        return matchedNumberCount;
+//    }
+//
+//    private static boolean isNumberSameAsBonusNumber(AnswerLotto answerLotto, Lotto lotto) {
+//        boolean isBonusNumber = false;
+//
+//        for (int index = 0; index < lotto.getSize(); index++) {
+//            if (answerLotto.getBonusNumber() == lotto.getNumber(index)) {
+//                isBonusNumber = true;
+//                break;
+//            }
+//        }
+//
+//        return isBonusNumber;
+//    }
+//
+//    public static EnumMap<LottoRank, Integer> initializeLottoRankCounter() {
+//        EnumMap<LottoRank, Integer> lottRankCounter = new EnumMap<>(LottoRank.class);
+//        Arrays.stream(LottoRank.values()).forEach(lottoRank -> lottRankCounter.put(lottoRank, 0));
+//        return lottRankCounter;
+//    }
+//
+//    public int getLottoPrice() {
+//        return lottoPrice;
+//    }
+//
+//    public int getMatchedNumCount() {
+//        return matchedNumCount;
+//    }
+//
+//    public boolean getisBonusNumber() {
+//        return isBonusNumber;
+//    }
 
 }
+
