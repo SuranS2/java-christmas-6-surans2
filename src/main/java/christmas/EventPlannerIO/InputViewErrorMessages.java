@@ -2,7 +2,7 @@ package christmas.EventPlannerIO;
 
 public enum InputViewErrorMessages {
     OUTPUT_ERROR("[ERROR]"),
-    OUTPUT_SPACE(" "),
+    OUTPUT_ERROR_SPACE(" "),
     OUTPUT_ERROR_OUTOFRANGE("유효하지 않은 날짜입니다. 다시 입력해주세요.");
     //필수
 
