@@ -33,12 +33,14 @@ calender 써볼까?
 
 
 1. 출력부 eventout %d param 사용
-안녕하세요! 우테코 식당 12월 이벤트 플래너입니다. 
+안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.
 v enum 메세지 작성 완료
+v OutputView 완료
 
 2. 출력부 eventout %d param // message 숫자만 입력해 주세요! 따로 관리)
 12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)
 v enum 메세지 작성완료 
+v OutputView 완료
 3. event input %d // 오류검출, 반복작업,
 4. exception 검사 구성
 - 방문할 날짜는 1 이상 31 이하의 숫자로만 입력받아 주세요.

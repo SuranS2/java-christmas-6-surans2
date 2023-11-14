@@ -16,7 +16,9 @@ public class OutputView {
         printer.printLine(OUTPUT_HELLO.getMessage() + OUTPUT_WELCOME.getFormattedMessage(DESEMBER));
     }
 
-
+    public void printAskVisitDate() {
+        printer.printLine(OUTPUT_ASK_DATE.getFormattedMessage(DESEMBER) + OUTPUT_DATE_ARGUMENT_LIMIT.getMessage());
+    }
 
 
     public void printMenu() {
