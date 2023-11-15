@@ -50,7 +50,6 @@ public class InputViewValidator {
     }
 
 
-
     public void validateMenu(String menu) {
 
         //view 검증 , 메뉴의 개수는 1 이상의 숫자, 메뉴 형식 따라야함
@@ -62,6 +61,7 @@ public class InputViewValidator {
 
         }
     }
+
     public void validateOnlyDrink(List<String> menuNames, List<String> drinkList) {
         menuNames.removeAll(drinkList);
         if (menuNames.isEmpty()) {

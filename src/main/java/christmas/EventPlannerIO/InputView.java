@@ -55,7 +55,7 @@ public class InputView {
                 String inputMenu = Console.readLine();
                 InputViewValidator.validateIsEmpty(inputMenu);
                 inputViewValidator.validateMenu(inputMenu);
-                Map<String, Integer> menuItems = checkMenu(inputMenu,allMenu,drinkList);
+                Map<String, Integer> menuItems = checkMenu(inputMenu, allMenu, drinkList);
                 return menuItems;
             } catch (IllegalArgumentException | IllegalStateException e) {
                 printer.printErrorMessage(e);
@@ -64,7 +64,8 @@ public class InputView {
         // ...
         //int값 리턴
     }
-    private Map<String, Integer> checkMenu(String inputMenu, List<String> allMenu, List<String> drinkList){
+
+    private Map<String, Integer> checkMenu(String inputMenu, List<String> allMenu, List<String> drinkList) {
         List<String> cutByCommaMenu = cutMenuList(inputMenu);
         List<String> cutByHypenMenu = cutByHypen(cutByCommaMenu);
         List<String> menuNames = getMenuNames(cutByHypenMenu);
@@ -118,7 +119,7 @@ public class InputView {
         return menuCopy;
     }
 
-    public void inputStop(){
+    public void inputStop() {
         Console.close();
     }
     // ...

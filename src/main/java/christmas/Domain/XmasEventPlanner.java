@@ -91,19 +91,21 @@ public class XmasEventPlanner {
         outputView.printBeforeDiscountAmount(priceAmount);
         int giveAwayPrice = giveAwayStuff(priceAmount);
         outputView.printEventAdvantageNotice();
-        int discountAmount =checkEventMinimumPriceAmount(priceAmount,giveAwayPrice);
-        eventPredictResult(priceAmount,discountAmount,giveAwayPrice);
+        int discountAmount = checkEventMinimumPriceAmount(priceAmount, giveAwayPrice);
+        eventPredictResult(priceAmount, discountAmount, giveAwayPrice);
     }
-    private int checkEventMinimumPriceAmount(int priceAmount,int giveAwayPrice){
-        if(TEN_K_WON<=priceAmount){
+
+    private int checkEventMinimumPriceAmount(int priceAmount, int giveAwayPrice) {
+        if (TEN_K_WON <= priceAmount) {
             return eventAdvantage(priceAmount, date, giveAwayPrice);
         }
         outputView.printNotThing();
         return NOT_THING;
     }
-    private void eventPredictResult(int priceAmount, int discountAmount,int giveAwayPrice){
+
+    private void eventPredictResult(int priceAmount, int discountAmount, int giveAwayPrice) {
         outputView.printTotalDiscountNotice();
-        outputView.printEventDiscountAmount(NOT_THING-discountAmount);
+        outputView.printEventDiscountAmount(NOT_THING - discountAmount);
         outputView.printPredictReceiptNotice();
         outputView.printPredictPrice(priceAmount - discountAmount + giveAwayPrice);
         outputView.printPredictBadgeNotice();
@@ -114,7 +116,7 @@ public class XmasEventPlanner {
     private int calculateAmount(Map<String, Integer> menuItems) {
         int priceAmount = NOT_THING;
         for (String key : menuItems.keySet()) {
-            priceAmount += allMenuInformation.get(key)*menuItems.get(key);
+            priceAmount += allMenuInformation.get(key) * menuItems.get(key);
         }
         return priceAmount;
     }
@@ -144,7 +146,7 @@ public class XmasEventPlanner {
     //혜택내역
     private int eventAdvantage(int priceAmount, int date, int servicePrice) {
         int discountAmount = NOT_THING;
-        if (priceAmount <= TEN_K_WON){
+        if (priceAmount <= TEN_K_WON) {
             outputView.printNotThing();
             return discountAmount;
         }
@@ -162,14 +164,13 @@ public class XmasEventPlanner {
     }
 
 
-
     private int dDayDiscount(int discountAmount) {
         int discount = NOT_THING;
         if (date <= D_DAY) {
             discount = ONE_THOUSAND_WON + ONE_HUNDRED_WON * (date - ONE);
             discountAmount += discount;
         }
-        if(discountAmount !=NOT_THING){
+        if (discountAmount != NOT_THING) {
             outputView.printEventAdvantageMessage(OUTPUT_CHRISTMAS_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
@@ -182,7 +183,7 @@ public class XmasEventPlanner {
             discount = calculateWeekDayDiscount(menuItems);
             discountAmount += discount;
         }
-        if(discount !=NOT_THING){
+        if (discount != NOT_THING) {
             outputView.printEventAdvantageMessage(OUTPUT_WEEKDAY_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
@@ -195,12 +196,13 @@ public class XmasEventPlanner {
         int discountAmount = NOT_THING;
         for (String key : dessertMenu.keySet()) {
             //menuItems.get으로 디저트 메뉴의 갯수를 가져옵니다.
-            discountAmount += checkIsNotNULL(menuItems,key);
+            discountAmount += checkIsNotNULL(menuItems, key);
         }
         return discountAmount;
     }
-    private int checkIsNotNULL(Map<String, Integer> menuItems, String key){
-        if(menuItems.get(key) == null) {
+
+    private int checkIsNotNULL(Map<String, Integer> menuItems, String key) {
+        if (menuItems.get(key) == null) {
             return NOT_THING;
         }
         return SPECIAL_YEAR * menuItems.get(key);
@@ -213,7 +215,7 @@ public class XmasEventPlanner {
             discount = calculateWeekEndDiscount(menuItems);
             discountAmount += discount;
         }
-        if(discount !=NOT_THING){
+        if (discount != NOT_THING) {
             outputView.printEventAdvantageMessage(OUTPUT_WEEKEND_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
@@ -235,7 +237,7 @@ public class XmasEventPlanner {
             discount = ONE_THOUSAND_WON;
             discountAmount += discount;
         }
-        if(discount !=NOT_THING){
+        if (discount != NOT_THING) {
             outputView.printEventAdvantageMessage(OUTPUT_SPECIALDAY_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
@@ -284,7 +286,6 @@ public class XmasEventPlanner {
         }
         return OUTPUT_NOTTHING.getMessage();
     }
-
 
 
     private void addMenus() {

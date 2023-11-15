@@ -9,8 +9,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-
-public class PersonalTest extends NsTest{
+public class PersonalTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
 
@@ -37,6 +36,7 @@ public class PersonalTest extends NsTest{
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 날짜_예외_범위_테스트() {
         assertSimpleTest(() -> {
@@ -44,6 +44,7 @@ public class PersonalTest extends NsTest{
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 날짜_예외_기본값_테스트() {
         assertSimpleTest(() -> {
@@ -51,6 +52,7 @@ public class PersonalTest extends NsTest{
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 날짜_예외_음수_테스트() {
         assertSimpleTest(() -> {
@@ -58,6 +60,7 @@ public class PersonalTest extends NsTest{
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 음료수만_주문불가_테스트() {
         assertSimpleTest(() -> {
@@ -81,6 +84,7 @@ public class PersonalTest extends NsTest{
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 주문_중복_테스트() {
         assertSimpleTest(() -> {
@@ -88,6 +92,7 @@ public class PersonalTest extends NsTest{
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 메뉴에_없는_주문_테스트() {
         assertSimpleTest(() -> {
@@ -95,18 +100,21 @@ public class PersonalTest extends NsTest{
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     void 메뉴_정규식테스트_주문_테스트() {
         assertSimpleTest(() -> {
             runException("4", "제로콜라맛있다,티본스테이크-1");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     void 주문_갯수_테스트() {
         assertSimpleTest(() -> {
             runException("3", "제로콜라-1,아이스크림-21,티본스테이크-1");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
