@@ -63,6 +63,10 @@ public class OutputView {
         }
 
     }
+//    public void printBeforeDiscountAmount(int money) {
+//        printer.printLine(NEWLINE + OUTPUT_RECEIPT_BEFORE_DISCOUNT_MESSAGE.getMessage());
+//        printer.printLine(NEWLINE + OUTPUT_RECEIPT_BEFORE_DISCOUNT_PRICE.getFormattedMessage(money));
+//    }
 
 
 

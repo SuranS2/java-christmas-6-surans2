@@ -71,13 +71,8 @@ public class InputViewValidator {
         }
     }
 
-    public void validateNotInMenu(List<String> menuNames, List<String> appetizerList, List<String> mainList,
-                                  List<String> dessertList, List<String> drinkList) {
-        List<String> allMenu = new ArrayList<>();
-        allMenu.addAll(appetizerList);
-        allMenu.addAll(mainList);
-        allMenu.addAll(dessertList);
-        allMenu.addAll(drinkList);
+    public void validateNotInMenu(List<String> menuNames, List<String> allMenu) {
+
         if (!allMenu.containsAll(menuNames)) {
             System.out.println("notinmenu");
             throw new IllegalStateException(OUTPUT_ERROR.getErrorMessage()
