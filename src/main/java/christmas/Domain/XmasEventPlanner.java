@@ -99,7 +99,8 @@ public class XmasEventPlanner {
         int servicePrice = sertviceStuff(priceAmount);
         outputView.printEventAdvantageNotice();
         int discountAmount = eventAdvantage(date, servicePrice);
-        OutputView
+        outputView.printTotalDiscountNotice();
+        outputView.printEventDiscountAmount(discountAmount);
     }
 
     private int calculateAmount(Map<String, Integer> menuItems) {
