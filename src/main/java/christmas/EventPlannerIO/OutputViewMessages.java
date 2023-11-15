@@ -5,6 +5,7 @@ public enum OutputViewMessages implements EnumMessageFormatter {
     //enum은 추상클래스라 따로 인터페이스로 작업해야하나?
 
     OUTPUT_HELLO("안녕하세요! "),
+    OUTPUT_SPACE(" "),
     OUTPUT_WELCOME("우테코 식당 %d월 이벤트 플래너입니다."),
     OUTPUT_ASK_DATE("%d월 중 식당 예상 방문 날짜는 언제인가요? "),
     OUTPUT_DATE_ARGUMENT_LIMIT("("+"숫자만 입력해 주세요!"+")"),
@@ -13,9 +14,9 @@ public enum OutputViewMessages implements EnumMessageFormatter {
     OUTPUT_MENU_ARGUMENT_LIMIT("("+"e.g. %s-%d,%s-%d,%s-%d"+")"),
     // 보너스 번호, 당첨번호 공통 확인 OUTPUT_ERROR
     // print 출력값 포장할 것
-    OUTPUT_MONTH_DATE("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
+    OUTPUT_EVENT_PREVIEW("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
     OUTPUT_ORDER_LIST_MESSAGE("<주문 메뉴>"),
-    OUTPUT_ORDER_LIST_EICH("%s %d개"),
+    OUTPUT_ORDER_LIST_EACH("%s %d개"),
     OUTPUT_RECEIPT_BEFORE_DISCOUNT_MESSAGE("<할인 전 총주문 금액>"),
     OUTPUT_RECEIPT_BEFORE_DISCOUNT_PRICE("%,d%s원"),
     OUTPUT_SERVICE_MENU_MESSAGE("<증정 메뉴>"),

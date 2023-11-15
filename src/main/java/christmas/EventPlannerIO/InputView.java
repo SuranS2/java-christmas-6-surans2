@@ -38,7 +38,7 @@ public class InputView {
         //int값 리턴
     }
 
-//- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
+    //- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
 //- 음료만 주문 시, 주문할 수 없습니다.
 //- 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.
     public List<String> readMenu() {
@@ -57,7 +57,9 @@ public class InputView {
         // ...
         //int값 리턴
     }
+
     private final String cutRegex = ",";
+
     private List<String> cutMenuList(String menu) {
         List<String> menuCopy = Arrays.stream(menu.split(cutRegex)).toList();
         return menuCopy;
@@ -67,3 +69,9 @@ public class InputView {
 }
 
 // Menu items 객체를 활용해보자 lottos 객체처럼 생각하자.
+
+// 에피타이저 맵
+// 디저트맵
+// 드링크맵
+// 메인디쉬맵
+//구성
