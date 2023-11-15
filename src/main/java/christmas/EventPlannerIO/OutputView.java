@@ -5,6 +5,7 @@ import static christmas.Menu.Appetizer.*;
 import static christmas.Menu.MainDish.*;
 import static christmas.Menu.Drink.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -73,9 +74,20 @@ public class OutputView {
 
     public void printServiceList() {
         printer.printLine(NEWLINE + OUTPUT_SERVICE_MENU_MESSAGE.getMessage());
-        printer.printLine(
-                OUTPUT_SERVICE_LIST.getFormattedMessage(DRINK_CHAMPAGNE.getDrinkName(), EXAMPLE_ONE));
+        printer.printLine(OUTPUT_GIVEAWAY_DISCOUNT_MESSAGE.getMessage()
+                + OUTPUT_COLON.getMessage()
+                + OUTPUT_SERVICE_LIST.getFormattedMessage(DRINK_CHAMPAGNE.getDrinkName(), EXAMPLE_ONE));
 
+    }
+    public void printEventAdvantageNotice(){
+        printer.printLine(NEWLINE + OUTPUT_EVENT_ADVANTAGE_NOTICE.getMessage());
+    }
+    public void printEventAdvantageMessage(String discountMessage, int discountPrice){
+        printer.printLine(NEWLINE + OUTPUT_EVENT_ADVANTAGE_MESSAGE.getFormattedMessage(discountMessage, discountPrice));
+    }
+    public void printNotThing() {
+        printer.printLine(NEWLINE + OUTPUT_SERVICE_MENU_MESSAGE.getMessage());
+        printer.printLine(OUTPUT_NOTTHING.getMessage());
     }
 
 
