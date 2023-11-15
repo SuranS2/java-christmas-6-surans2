@@ -53,7 +53,6 @@ public class XmasEventPlanner {
     private final Map<String,Integer> allMenuInformation = new HashMap<>();
 
 
-
     public XmasEventPlanner(){
         addMenus();
         addPrices();
@@ -61,8 +60,44 @@ public class XmasEventPlanner {
         this.inputView = new InputView();
         this.outputView = new OutputView();
         start();
-        stop();
+        eventPreviewResult();
     }
+
+    private Map<String,Integer> menuItems = new HashMap<>();
+    private int date = 0;
+    private void start(){
+//        TestCode();
+        outputView.printWelcomeMessage();
+        outputView.printAskVisitDate();
+        date = inputView.readDate();
+        outputView.printAskMenu();
+        // menuItems의 Integer값은 갯수임
+        menuItems = inputView.readMenu(allMenu,drinkList);
+
+
+    }
+    private void eventPreviewResult(){
+        outputView.printMenu(date);
+        outputView.printEventPreview(menuItems);
+        int priceAmount = calculateAmount( menuItems );
+        outputView.printBeforeDiscountAmount(priceAmount);
+
+    }
+
+    private int calculateAmount( Map<String,Integer> menuItems ){
+        int priceAmount=0;
+        for( String key : menuItems.keySet() ){
+//            System.out.println("작동중");
+//            System.out.println(allMenuInformation.get(key));
+            priceAmount += allMenuInformation.get(key);
+        }
+        return priceAmount;
+    }
+
+//    private void
+    //- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
+
+
     private void addMenus(){
         allMenu.addAll(appetizerList);
         allMenu.addAll(mainList);
@@ -79,29 +114,6 @@ public class XmasEventPlanner {
         for( int i = 0 ; i < allMenu.size(); i++){
             allMenuInformation.put(allMenu.get(i), allPrice.get(i));
         }
-    }
-    private void start(){
-
-//        TestCode();
-        outputView.printWelcomeMessage();
-        outputView.printAskVisitDate();
-        int date = inputView.readDate();
-
-        outputView.printAskMenu();
-        Map<String,Integer> menuItems = inputView.readMenu(allMenu,drinkList);
-        outputView.printMenu(date);
-        outputView.printEventPreview(menuItems);
-
-    }
-    //- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
-
-
-
-
-
-    //입력값 검증 끝나면 stop
-    private void stop(){
-
     }
 
 }
