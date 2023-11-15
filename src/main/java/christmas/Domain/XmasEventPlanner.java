@@ -99,6 +99,7 @@ public class XmasEventPlanner {
         int servicePrice = sertviceStuff(priceAmount);
         outputView.printEventAdvantageNotice();
         int discountAmount = eventAdvantage(date, servicePrice);
+        OutputView
     }
 
     private int calculateAmount(Map<String, Integer> menuItems) {
@@ -160,7 +161,7 @@ public class XmasEventPlanner {
         if (!checkWeekEnd) {
             int discount = calculateWeekDayDiscount(menuItems);
             discountAmount += discount;
-            outputView.printEventAdvantageMessage(OUTPUT_CHRISTMAS_DISCOUNT_MESSAGE.getMessage(), discount);
+            outputView.printEventAdvantageMessage(OUTPUT_WEEKDAY_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
     }
@@ -181,7 +182,7 @@ public class XmasEventPlanner {
         if (checkWeekEnd) {
             int discount = calculateWeekEndDiscount(menuItems);
             discountAmount += discount;
-            outputView.printEventAdvantageMessage(OUTPUT_CHRISTMAS_DISCOUNT_MESSAGE.getMessage(), discount);
+            outputView.printEventAdvantageMessage(OUTPUT_WEEKEND_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
     }
