@@ -85,6 +85,14 @@ public class OutputView {
     public void printEventAdvantageMessage(String discountMessage, int discountPrice){
         printer.printLine(NEWLINE + OUTPUT_EVENT_ADVANTAGE_MESSAGE.getFormattedMessage(discountMessage, discountPrice));
     }
+    public void printTotalDiscountNotice(){
+        printer.printLine(NEWLINE + OUTPUT_TOTAL_DISCOUNT_MESSAGE.getMessage());
+    }
+    public void printEventDiscountAmount(int discountAmount){
+        printer.printLine(NEWLINE + OUTPUT_TOTAL_DISCOUNT_PRICE.getFormattedMessage(discountAmount));
+    }
+
+
     public void printNotThing() {
         printer.printLine(NEWLINE + OUTPUT_SERVICE_MENU_MESSAGE.getMessage());
         printer.printLine(OUTPUT_NOTTHING.getMessage());
