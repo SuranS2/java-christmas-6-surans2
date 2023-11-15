@@ -110,10 +110,12 @@ v작성 완료
 10. eventout %s
 <할인 전 총주문 금액>
 v enum 메세지 작성
+v 완료
 
 11. domain 계산
 142,000원
 v enum 메세지 작성
+v 완료
 
 12. event output
 <증정 메뉴>

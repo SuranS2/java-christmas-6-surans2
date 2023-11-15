@@ -12,8 +12,8 @@ public class OutputView {
     private static final String NEWLINE = "\n";
     private final OutputViewPrinter printer;
     private static final int DESEMBER = 12;
-    private final int EXAMPLE_ONE = 1;
-    private final int EXAMPLE_TWO = 2;
+    private static final int EXAMPLE_ONE = 1;
+    private static final int EXAMPLE_TWO = 2;
 
     public OutputView() {
         this.printer = new OutputViewPrinter();
@@ -36,7 +36,7 @@ public class OutputView {
                 EXAMPLE_ONE,
                 MAIN_STEAK.getMainDishName(),
                 EXAMPLE_ONE,
-                MAIN_REDWINE.getDrinkName(),
+                DRINK_REDWINE.getDrinkName(),
                 EXAMPLE_TWO
         ));
     }
@@ -49,6 +49,7 @@ public class OutputView {
         printer.printLine(NEWLINE + OUTPUT_EVENT_PREVIEW.getFormattedMessage(DESEMBER, date));
         printer.printLine(NEWLINE + OUTPUT_ORDER_LIST_MESSAGE.getMessage());
     }
+
     public void printEventPreview(Map<String, Integer> menuItems) {
         for (Entry<String, Integer> entrySet : menuItems.entrySet()) {
             //맵 자료에 개수가 0이 아니라면 출력
@@ -56,19 +57,26 @@ public class OutputView {
         }
     }
 
-    private void menuItemsEmptyCheck(Entry<String,Integer> entrySet) {
-        if (entrySet.getValue()!=0) {
+    private void menuItemsEmptyCheck(Entry<String, Integer> entrySet) {
+        if (entrySet.getValue() != 0) {
             printer.printLine(OUTPUT_ORDER_LIST_EACH
-                            .getFormattedMessage(entrySet.getKey(), entrySet.getValue()));
+                    .getFormattedMessage(entrySet.getKey(), entrySet.getValue()));
         }
 
     }
+
     public void printBeforeDiscountAmount(int money) {
         printer.printLine(NEWLINE + OUTPUT_RECEIPT_BEFORE_DISCOUNT_MESSAGE.getMessage());
         printer.printLine(OUTPUT_RECEIPT_BEFORE_DISCOUNT_PRICE.getFormattedMessage(money));
     }
 
 
+    public void printServiceList() {
+        printer.printLine(NEWLINE + OUTPUT_SERVICE_MENU_MESSAGE.getMessage());
+        printer.printLine(
+                OUTPUT_SERVICE_LIST.getFormattedMessage(DRINK_CHAMPAGNE.getDrinkName(), EXAMPLE_ONE));
+
+    }
 
 
     public void printErrorMessage(Exception exception) {
