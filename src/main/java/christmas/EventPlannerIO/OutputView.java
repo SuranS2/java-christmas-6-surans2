@@ -72,8 +72,10 @@ public class OutputView {
     }
 
 
-    public void printServiceList() {
+    public void printServiceListNotice() {
         printer.printLine(NEWLINE + OUTPUT_SERVICE_MENU_MESSAGE.getMessage());
+    }
+    public void printServiceList() {
         printer.printLine(OUTPUT_GIVEAWAY_DISCOUNT_MESSAGE.getMessage()
                 + OUTPUT_COLON.getMessage()
                 + OUTPUT_SERVICE_LIST.getFormattedMessage(DRINK_CHAMPAGNE.getDrinkName(), EXAMPLE_ONE));
@@ -83,18 +85,29 @@ public class OutputView {
         printer.printLine(NEWLINE + OUTPUT_EVENT_ADVANTAGE_NOTICE.getMessage());
     }
     public void printEventAdvantageMessage(String discountMessage, int discountPrice){
-        printer.printLine(NEWLINE + OUTPUT_EVENT_ADVANTAGE_MESSAGE.getFormattedMessage(discountMessage, discountPrice));
+        printer.printLine(OUTPUT_EVENT_ADVANTAGE_MESSAGE.getFormattedMessage(discountMessage, discountPrice));
     }
     public void printTotalDiscountNotice(){
         printer.printLine(NEWLINE + OUTPUT_TOTAL_DISCOUNT_MESSAGE.getMessage());
     }
     public void printEventDiscountAmount(int discountAmount){
-        printer.printLine(NEWLINE + OUTPUT_TOTAL_DISCOUNT_PRICE.getFormattedMessage(discountAmount));
+        printer.printLine(OUTPUT_TOTAL_DISCOUNT_PRICE.getFormattedMessage(discountAmount));
     }
 
+    public void printPredictReceiptNotice(){
+        printer.printLine(NEWLINE +OUTPUT_PREDICT_RECEIPT.getMessage());
+    }
+    public void printPredictPrice(int predictPrice){
+        printer.printLine(OUTPUT_REDICT_PRICE.getFormattedMessage(predictPrice));
+    }
+    public void printPredictBadgeNotice(){
+        printer.printLine(NEWLINE + OUTPUT_EVENT_BADGE_MESSAGE.getFormattedMessage(DESEMBER));
+    }
+    public void printPredictBadge(String badge){
+        printer.printLine(badge);
+    }
 
     public void printNotThing() {
-        printer.printLine(NEWLINE + OUTPUT_SERVICE_MENU_MESSAGE.getMessage());
         printer.printLine(OUTPUT_NOTTHING.getMessage());
     }
 
