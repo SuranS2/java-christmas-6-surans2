@@ -53,7 +53,7 @@ public class InputViewValidator {
 
     public void validateMenu(String menu) {
 
-//view 검증 , 메뉴의 개수는 1 이상의 숫자, 메뉴 형식 따라야함
+        //view 검증 , 메뉴의 개수는 1 이상의 숫자, 메뉴 형식 따라야함
         if (!inputMenuFormatComplie().matcher(menu).matches()) {
             throw new IllegalStateException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
@@ -63,7 +63,6 @@ public class InputViewValidator {
     }
     public void validateOnlyDrink(List<String> menuNames, List<String> drinkList) {
         menuNames.removeAll(drinkList);
-        // != 연산부분 포장해서 true값으로 작업할것?
         if (menuNames.isEmpty()) {
             throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
@@ -98,7 +97,7 @@ public class InputViewValidator {
 
     public void validateMenuCount(List<Integer> menuCount) {
         //형변환
-        if (menuCount.stream().mapToInt(Integer::intValue).sum() > 20) {
+        if (menuCount.stream().mapToInt(Integer::intValue).sum() > LIMIT_MENU_NUMBERS) {
             throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());

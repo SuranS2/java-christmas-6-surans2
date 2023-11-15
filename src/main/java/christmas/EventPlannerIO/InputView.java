@@ -35,11 +35,6 @@ public class InputView {
         this.inputViewValidator = new InputViewValidator();
     }
 
-//
-//    public static final Pattern INPUT_ANSWER_LOTTO_NUMBERS_FORMAT =
-//            Pattern.compile("^" + "-?\\d+,".repeat(Lotto.LOTTO_SIZE - 1) + "-?\\d+$");
-//    public static final String NUMBERS_DELIMITER = ",";
-
     public int readDate() {
         while (true) {
             try {

@@ -161,15 +161,20 @@ v enum 메세지 작성 완료
 v 작성 완료
 - 총혜택 금액 = 할인 금액의 합계 + 증정 메뉴의 가격
 18. domain amount discount
+v작성 완료
 
 19. event output %s %d
 <할인 후 예상 결제 금액>
 135,754원
+v작성 완료
 20. domain all count
+v작성 완료
 
 21. domain batch
 22. event output %d %s %s
-23. game controller 정의
+v작성 완료
+23. XmasEventPlanner 정의
+v작성 완료
 
 <12월 이벤트 배지>
 산타
