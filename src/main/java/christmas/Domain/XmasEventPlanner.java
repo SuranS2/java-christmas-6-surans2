@@ -4,7 +4,6 @@ package christmas.Domain;
 import static christmas.EventPlannerIO.OutputViewMessages.*;
 import static christmas.Menu.Drink.DRINK_CHAMPAGNE;
 
-import christmas.EventPlannerIO.*;
 import christmas.Menu.Appetizer;
 import christmas.Menu.Dessert;
 import christmas.Menu.Drink;
@@ -25,13 +24,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class XmasEventPlanner {
-    // Menu items 객체를 활용해보자 lottos 객체처럼 생각하자.
-
-    // 에피타이저 맵
-    // 디저트맵
-    // 드링크맵
-    // 메인디쉬맵
-    //LIST로 박아버리자
 
 
     private final InputView inputView;
@@ -72,14 +64,14 @@ public class XmasEventPlanner {
         getDrinkMenu();
         this.inputView = new InputView();
         this.outputView = new OutputView();
-        start();
+        eventInput();
         eventPreviewResult();
     }
 
     private Map<String, Integer> menuItems = new HashMap<>();
     private int date = 0;
 
-    private void start() {
+    private void eventInput() {
 //        TestCode();
         outputView.printWelcomeMessage();
         outputView.printAskVisitDate();
@@ -88,27 +80,40 @@ public class XmasEventPlanner {
         // menuItems의 Integer값은 갯수임
         menuItems = inputView.readMenu(allMenu, drinkList);
 
-
     }
 
+    //    private void
+    //- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
     private void eventPreviewResult() {
         outputView.printMenu(date);
         outputView.printEventPreview(menuItems);
         int priceAmount = calculateAmount(menuItems);
         outputView.printBeforeDiscountAmount(priceAmount);
-        int servicePrice = sertviceStuff(priceAmount);
+        int giveAwayPrice = giveAwayStuff(priceAmount);
         outputView.printEventAdvantageNotice();
-        int discountAmount = eventAdvantage(date, servicePrice);
+        int discountAmount =checkEventMinimumPriceAmount(priceAmount,giveAwayPrice);
+        eventPredictResult(priceAmount,discountAmount,giveAwayPrice);
+    }
+    private int checkEventMinimumPriceAmount(int priceAmount,int giveAwayPrice){
+        if(TEN_K_WON<=priceAmount){
+            return eventAdvantage(priceAmount, date, giveAwayPrice);
+        }
+        outputView.printNotThing();
+        return NOT_THING;
+    }
+    private void eventPredictResult(int priceAmount, int discountAmount,int giveAwayPrice){
         outputView.printTotalDiscountNotice();
-        outputView.printEventDiscountAmount(discountAmount);
+        outputView.printEventDiscountAmount(NOT_THING-discountAmount);
+        outputView.printPredictReceiptNotice();
+        outputView.printPredictPrice(priceAmount - discountAmount + giveAwayPrice);
+        outputView.printPredictBadgeNotice();
+        outputView.printPredictBadge(checkBadge(discountAmount));
     }
 
     private int calculateAmount(Map<String, Integer> menuItems) {
         int priceAmount = NOT_THING;
         for (String key : menuItems.keySet()) {
-//            System.out.println("작동중");
-//            System.out.println(allMenuInformation.get(key));
-            priceAmount += allMenuInformation.get(key);
+            priceAmount += allMenuInformation.get(key)*menuItems.get(key);
         }
         return priceAmount;
     }
@@ -117,8 +122,11 @@ public class XmasEventPlanner {
     private static final int ONE = 1;
     private static final int NOT_THING = 0;
 
-    private int sertviceStuff(int priceAmount) {
+    //증정메뉴
+    private int giveAwayStuff(int priceAmount) {
+        outputView.printServiceListNotice();
         if (EVENT_MINIMUM_PRICE < priceAmount) {
+
             outputView.printServiceList();
             return DRINK_CHAMPAGNE.getDrinkPrice() * ONE;
         }
@@ -126,88 +134,113 @@ public class XmasEventPlanner {
         return NOT_THING;
     }
 
-    private final int D_DAY = 25;
-    private final List<Integer> specialDay = Arrays.asList(3, 10, 17, 24, 25, 31);
-    private final int ONE_THOUSAND_WON = 1000;
-    private final int ONE_HUNDRED_WON = 100;
-    private final List<Integer> WEEKEND = Arrays.asList(1, 7);
+    private static final int D_DAY = 25;
+    private static final List<Integer> specialDay = Arrays.asList(3, 10, 17, 24, 25, 31);
+    private static final int ONE_THOUSAND_WON = 1000;
+    private static final int ONE_HUNDRED_WON = 100;
+    private static final List<Integer> WEEKEND = Arrays.asList(1, 7);
 
-    private int eventAdvantage(int date, int servicePrice) {
+    //혜택내역
+    private int eventAdvantage(int priceAmount, int date, int servicePrice) {
         int discountAmount = NOT_THING;
-        discountAmount=dDayDiscount(discountAmount);
-        //주말이 포함되면 true 반납
-        boolean checkWeekEnd = WEEKEND.contains(getDateDay("2023" + "12" + Integer.toString(date)));
-        discountAmount=weekDayDiscount(checkWeekEnd,discountAmount,menuItems);
-        discountAmount=weekEndDiscount(checkWeekEnd,discountAmount,menuItems);
-        discountAmount=specialDayDiscount(discountAmount);
-        discountAmount=servicePriceDiscount(discountAmount,servicePrice);
-        if (discountAmount != NOT_THING) {
+        if (priceAmount <= TEN_K_WON){
+            outputView.printNotThing();
             return discountAmount;
         }
-        outputView.printNotThing();
-        return NOT_THING;
+        discountAmount = dDayDiscount(discountAmount);
+        //주말이 포함되면 true 반납
+        boolean checkWeekEnd = WEEKEND.contains(getDateDay("2023" + "12" + Integer.toString(date)));
+        discountAmount = weekDayDiscount(checkWeekEnd, discountAmount, menuItems);
+        discountAmount = weekEndDiscount(checkWeekEnd, discountAmount, menuItems);
+        discountAmount = specialDayDiscount(discountAmount);
+        discountAmount = giveAwayPriceDiscount(discountAmount, servicePrice);
+        if (discountAmount == NOT_THING) {
+            outputView.printNotThing();
+        }
+        return discountAmount;
     }
 
+
+
     private int dDayDiscount(int discountAmount) {
+        int discount = NOT_THING;
         if (date <= D_DAY) {
-            int discount = ONE_THOUSAND_WON + ONE_HUNDRED_WON * (date - ONE);
+            discount = ONE_THOUSAND_WON + ONE_HUNDRED_WON * (date - ONE);
             discountAmount += discount;
+        }
+        if(discountAmount !=NOT_THING){
             outputView.printEventAdvantageMessage(OUTPUT_CHRISTMAS_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
     }
-    //완료
 
-    private int weekDayDiscount(boolean checkWeekEnd, int discountAmount,Map<String, Integer> menuItems) {
+    //평일할인 디저트
+    private int weekDayDiscount(boolean checkWeekEnd, int discountAmount, Map<String, Integer> menuItems) {
+        int discount = NOT_THING;
         if (!checkWeekEnd) {
-            int discount = calculateWeekDayDiscount(menuItems);
+            discount = calculateWeekDayDiscount(menuItems);
             discountAmount += discount;
+        }
+        if(discount !=NOT_THING){
             outputView.printEventAdvantageMessage(OUTPUT_WEEKDAY_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
     }
 
     private static final int SPECIAL_YEAR = 2023;
+
     //디저트 할인
     private int calculateWeekDayDiscount(Map<String, Integer> menuItems) {
         int discountAmount = NOT_THING;
         for (String key : dessertMenu.keySet()) {
             //menuItems.get으로 디저트 메뉴의 갯수를 가져옵니다.
-            discountAmount += SPECIAL_YEAR*menuItems.get(key);
+            discountAmount += checkIsNotNULL(menuItems,key);
         }
         return discountAmount;
     }
+    private int checkIsNotNULL(Map<String, Integer> menuItems, String key){
+        if(menuItems.get(key) == null) {
+            return NOT_THING;
+        }
+        return SPECIAL_YEAR * menuItems.get(key);
+    }
 
-
+    //주말할인 메인메뉴
     private int weekEndDiscount(boolean checkWeekEnd, int discountAmount, Map<String, Integer> menuItems) {
+        int discount = NOT_THING;
         if (checkWeekEnd) {
-            int discount = calculateWeekEndDiscount(menuItems);
+            discount = calculateWeekEndDiscount(menuItems);
             discountAmount += discount;
+        }
+        if(discount !=NOT_THING){
             outputView.printEventAdvantageMessage(OUTPUT_WEEKEND_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
     }
+
     //메인 할인
     private int calculateWeekEndDiscount(Map<String, Integer> menuItems) {
         int discountAmount = NOT_THING;
         for (String key : mainMenu.keySet()) {
             //menuItems.get으로 디저트 메뉴의 갯수를 가져옵니다.
-            discountAmount += SPECIAL_YEAR*menuItems.get(key);
+            discountAmount += checkIsNotNULL(menuItems, key);
         }
         return discountAmount;
     }
 
     private int specialDayDiscount(int discountAmount) {
+        int discount = NOT_THING;
         if (specialDay.contains(date)) {
-            int discount = ONE_THOUSAND_WON;
+            discount = ONE_THOUSAND_WON;
             discountAmount += discount;
+        }
+        if(discount !=NOT_THING){
             outputView.printEventAdvantageMessage(OUTPUT_SPECIALDAY_DISCOUNT_MESSAGE.getMessage(), discount);
         }
         return discountAmount;
     }
-    //완료
 
-    private int servicePriceDiscount(int discountAmount, int servicePrice) {
+    private int giveAwayPriceDiscount(int discountAmount, int servicePrice) {
         if (servicePrice != NOT_THING) {
             int discount = servicePrice;
             discountAmount += discount;
@@ -215,7 +248,6 @@ public class XmasEventPlanner {
         }
         return discountAmount;
     }
-    //완료
 
     private int getDateDay(String date) {
         Calendar cal = Calendar.getInstance();
@@ -235,8 +267,23 @@ public class XmasEventPlanner {
         return dayNum;
     }
 
-//    private void
-    //- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
+    private static final int TWENTY_K_WON = 20_000;
+    private static final int TEN_K_WON = 10_000;
+    private static final int FIVE_K_WON = 5_000;
+
+    private String checkBadge(int discountAmount) {
+        if (TWENTY_K_WON <= discountAmount) {
+            return OUTPUT_EVENT_BADGE_SANTA.getMessage();
+        }
+        if (TEN_K_WON <= discountAmount) {
+            return OUTPUT_EVENT_BADGE_TREE.getMessage();
+        }
+        if (FIVE_K_WON <= discountAmount) {
+            return OUTPUT_EVENT_BADGE_STAR.getMessage();
+        }
+        return OUTPUT_NOTTHING.getMessage();
+    }
+
 
 
     private void addMenus() {
@@ -258,21 +305,25 @@ public class XmasEventPlanner {
             allMenuInformation.put(allMenu.get(i), allPrice.get(i));
         }
     }
+
     private void getAppetizerMenu() {
         for (int i = 0; i < appetizerList.size(); i++) {
             apptizerMenu.put(appetizerList.get(i), appetizerPriceList.get(i));
         }
     }
+
     private void getMainMenu() {
         for (int i = 0; i < mainList.size(); i++) {
             mainMenu.put(mainList.get(i), mainPriceList.get(i));
         }
     }
+
     private void getDessertMenu() {
         for (int i = 0; i < dessertList.size(); i++) {
             dessertMenu.put(dessertList.get(i), dessertPriceList.get(i));
         }
     }
+
     private void getDrinkMenu() {
         for (int i = 0; i < drinkList.size(); i++) {
             drinkMenu.put(drinkList.get(i), drinkPriceList.get(i));
