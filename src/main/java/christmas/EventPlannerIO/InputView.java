@@ -53,27 +53,14 @@ public class InputView {
         //int값 리턴
     }
 
-    //- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
-//- 음료만 주문 시, 주문할 수 없습니다.
-//- 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.
+
     public Map<String, Integer> readMenu() {
         while (true) {
             try {
                 String inputMenu = Console.readLine();
                 InputViewValidator.validateIsEmpty(inputMenu);
                 inputViewValidator.validateMenu(inputMenu);
-
-                List<String> cutByCommaMenu = cutMenuList(inputMenu);
-                List<String> cutByHypenMenu = cutByHypen(cutByCommaMenu);
-                List<String> menuNames = getMenuNames(cutByHypenMenu);
-                List<Integer> menuCount = getMenuCount(cutByHypenMenu);
-                inputViewValidator.validateMenuDuplicate(menuNames);
-                inputViewValidator.validateOnlyDrink(menuNames, drinkList);
-                inputViewValidator.validateNotInMenu(menuNames, appetizerList, mainList, dessertList, drinkList);
-                inputViewValidator.validateMenuCount(menuCount);
-
-                Map<String, Integer> menuItems = changeToMenuItems(cutByHypenMenu);
-
+                Map<String, Integer> menuItems = checkMenu(inputMenu);
                 return menuItems;
             } catch (IllegalArgumentException | IllegalStateException e) {
                 printer.printErrorMessage(e);
@@ -81,6 +68,17 @@ public class InputView {
         }
         // ...
         //int값 리턴
+    }
+    private Map<String, Integer> checkMenu(String inputMenu){
+        List<String> cutByCommaMenu = cutMenuList(inputMenu);
+        List<String> cutByHypenMenu = cutByHypen(cutByCommaMenu);
+        List<String> menuNames = getMenuNames(cutByHypenMenu);
+        List<Integer> menuCount = getMenuCount(cutByHypenMenu);
+        inputViewValidator.validateMenuDuplicate(menuNames);
+        inputViewValidator.validateNotInMenu(menuNames, appetizerList, mainList, dessertList, drinkList);
+        inputViewValidator.validateOnlyDrink(menuNames, drinkList);
+        inputViewValidator.validateMenuCount(menuCount);
+        return changeToMenuItems(cutByHypenMenu);
     }
 
     public Map<String, Integer> changeToMenuItems(List<String> cutByHypenMenu) {

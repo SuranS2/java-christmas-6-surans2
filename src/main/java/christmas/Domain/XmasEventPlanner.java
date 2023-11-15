@@ -46,12 +46,12 @@ public class XmasEventPlanner {
         int date = inputView.readDate();
 
         outputView.printAskMenu();
-        Map<String,Integer> menu = inputView.readMenu();
+        Map<String,Integer> menuItems = inputView.readMenu();
         outputView.printMenu(date);
-        System.out.println(menu);
+        outputView.printEventPreview(menuItems);
 
     }
-
+    //- 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.
 
 
 

@@ -3,7 +3,6 @@ package christmas.EventPlannerIO;
 import static christmas.EventPlannerIO.OutputViewMessages.*;
 import static christmas.Menu.Appetizer.*;
 import static christmas.Menu.MainDish.*;
-import static christmas.Menu.Dessert.*;
 import static christmas.Menu.Drink.*;
 
 import java.util.Map;
@@ -13,8 +12,8 @@ public class OutputView {
     private static final String NEWLINE = "\n";
     private final OutputViewPrinter printer;
     private static final int DESEMBER = 12;
-    private final int ONE = 1;
-    private final int TWO = 2;
+    private final int EXAMPLE_ONE = 1;
+    private final int EXAMPLE_TWO = 2;
 
     public OutputView() {
         this.printer = new OutputViewPrinter();
@@ -34,11 +33,11 @@ public class OutputView {
         printer.printLine(NEWLINE + OUTPUT_ASK_MENU_NUMBERS.getMessage());
         printer.printLine(OUTPUT_MENU_ARGUMENT_LIMIT.getFormattedMessage(
                 APPETIZER_SALAD.getAppetizerName(),
-                ONE,
+                EXAMPLE_ONE,
                 MAIN_STEAK.getMainDishName(),
-                ONE,
+                EXAMPLE_ONE,
                 MAIN_REDWINE.getDrinkName(),
-                TWO
+                EXAMPLE_TWO
         ));
     }
 
@@ -51,8 +50,6 @@ public class OutputView {
         printer.printLine(NEWLINE + OUTPUT_ORDER_LIST_MESSAGE.getMessage());
     }
     public void printEventPreview(Map<String, Integer> menuItems) {
-
-
         for (Entry<String, Integer> entrySet : menuItems.entrySet()) {
             //맵 자료에 개수가 0이 아니라면 출력
             menuItemsEmptyCheck(entrySet);
@@ -61,8 +58,7 @@ public class OutputView {
 
     private void menuItemsEmptyCheck(Entry<String,Integer> entrySet) {
         if (entrySet.getValue()!=0) {
-            printer.printLine(
-                    NEWLINE + OUTPUT_ORDER_LIST_EACH
+            printer.printLine(OUTPUT_ORDER_LIST_EACH
                             .getFormattedMessage(entrySet.getKey(), entrySet.getValue()));
         }
 

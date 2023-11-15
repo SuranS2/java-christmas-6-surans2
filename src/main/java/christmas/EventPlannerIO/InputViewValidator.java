@@ -78,7 +78,8 @@ public class InputViewValidator {
         allMenu.addAll(mainList);
         allMenu.addAll(dessertList);
         allMenu.addAll(drinkList);
-        if (!allMenu.contains(menuNames)) {
+        if (!allMenu.containsAll(menuNames)) {
+            System.out.println("notinmenu");
             throw new IllegalStateException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
