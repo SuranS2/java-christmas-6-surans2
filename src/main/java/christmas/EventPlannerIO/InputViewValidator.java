@@ -55,6 +55,7 @@ public class InputViewValidator {
 
         //view 검증 , 메뉴의 개수는 1 이상의 숫자, 메뉴 형식 따라야함
         if (!inputMenuFormatComplie().matcher(menu).matches()) {
+            System.out.println("패턴에러");
             throw new IllegalStateException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
@@ -64,6 +65,7 @@ public class InputViewValidator {
     public void validateOnlyDrink(List<String> menuNames, List<String> drinkList) {
         menuNames.removeAll(drinkList);
         if (menuNames.isEmpty()) {
+            System.out.println("음료수만있냐");
             throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
@@ -73,7 +75,7 @@ public class InputViewValidator {
     public void validateNotInMenu(List<String> menuNames, List<String> allMenu) {
 
         if (!allMenu.containsAll(menuNames)) {
-            System.out.println("notinmenu");
+            System.out.println("메뉴에 없는상태");
             throw new IllegalStateException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
@@ -86,6 +88,7 @@ public class InputViewValidator {
         //형변환
         Set<String> checkDuplicateMenu = new HashSet<>(menuNames);
         if (menuNames.size() != checkDuplicateMenu.size()) {
+            System.out.println("메뉴중복");
             throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
@@ -98,6 +101,7 @@ public class InputViewValidator {
     public void validateMenuCount(List<Integer> menuCount) {
         //형변환
         if (menuCount.stream().mapToInt(Integer::intValue).sum() > LIMIT_MENU_NUMBERS) {
+            System.out.println("메뉴숫자");
             throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
@@ -106,6 +110,7 @@ public class InputViewValidator {
 
     public static void validateIsEmpty(String validateTarget) {
         if (isEmpty(validateTarget)) {
+            System.out.println("비어있는지");
             throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());

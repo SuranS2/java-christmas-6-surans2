@@ -76,7 +76,7 @@ public class InputView {
         return changeToMenuItems(cutByHypenMenu);
     }
 
-    public Map<String, Integer> changeToMenuItems(List<String> cutByHypenMenu) {
+    private Map<String, Integer> changeToMenuItems(List<String> cutByHypenMenu) {
         Map<String, Integer> menuItems = new HashMap<String, Integer>();
         for (int i = 0; i * 2 < cutByHypenMenu.size(); i++) {
             menuItems.put(cutByHypenMenu.get(i * 2), Integer.parseInt(cutByHypenMenu.get(i * 2 + 1)));
@@ -118,6 +118,9 @@ public class InputView {
         return menuCopy;
     }
 
+    public void inputStop(){
+        Console.close();
+    }
     // ...
 }
 

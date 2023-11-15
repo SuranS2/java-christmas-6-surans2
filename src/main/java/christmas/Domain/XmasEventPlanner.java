@@ -108,6 +108,7 @@ public class XmasEventPlanner {
         outputView.printPredictPrice(priceAmount - discountAmount + giveAwayPrice);
         outputView.printPredictBadgeNotice();
         outputView.printPredictBadge(checkBadge(discountAmount));
+        inputView.inputStop();
     }
 
     private int calculateAmount(Map<String, Integer> menuItems) {
