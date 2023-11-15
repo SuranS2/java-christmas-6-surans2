@@ -46,8 +46,12 @@ public class OutputView {
 //    for (Entry<Integer, String> entrySet : map.entrySet()) {
 //        System.out.println(entrySet.getKey() + " : " + entrySet.getValue());
 //    }
-    public void printEventPreview(int date, Map<String, Integer> menuItems) {
+    public void printMenu(int date) {
         printer.printLine(NEWLINE + OUTPUT_EVENT_PREVIEW.getFormattedMessage(DESEMBER, date));
+        printer.printLine(NEWLINE + OUTPUT_ORDER_LIST_MESSAGE.getMessage());
+    }
+    public void printEventPreview(Map<String, Integer> menuItems) {
+
 
         for (Entry<String, Integer> entrySet : menuItems.entrySet()) {
             //맵 자료에 개수가 0이 아니라면 출력
@@ -64,9 +68,7 @@ public class OutputView {
 
     }
 
-    public void printMenu() {
-        printer.printLine(NEWLINE + OUTPUT_ORDER_LIST_MESSAGE.getMessage());
-    }
+
 
 
     public void printErrorMessage(Exception exception) {

@@ -1,6 +1,5 @@
-package christmas.menu;
+package christmas.Menu;
 
-import christmas.menu.MenuInterface;
 // enum 인터페이스?
 
 public enum Appetizer {

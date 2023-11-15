@@ -27,7 +27,6 @@ public class InputView {
     public int readDate() {
         while (true) {
             try {
-                printer.printAskVisitDate();
                 String inputDate = Console.readLine();
                 return inputViewValidator.validateDate(inputDate);
             } catch (IllegalArgumentException | IllegalStateException e) {
@@ -44,11 +43,10 @@ public class InputView {
     public List<String> readMenu() {
         while (true) {
             try {
-                printer.printAskMenu();
                 String inputMenu = Console.readLine();
                 InputViewValidator.validateIsEmpty(inputMenu);
+                inputViewValidator.validateMenu(inputMenu);
                 List<String> inputMenuCopy = cutMenuList(inputMenu);
-                inputViewValidator.validateMenu(inputMenuCopy.size(), inputMenu);
                 return inputMenuCopy;
             } catch (IllegalArgumentException | IllegalStateException e) {
                 printer.printErrorMessage(e);
@@ -68,10 +66,3 @@ public class InputView {
     // ...
 }
 
-// Menu items 객체를 활용해보자 lottos 객체처럼 생각하자.
-
-// 에피타이저 맵
-// 디저트맵
-// 드링크맵
-// 메인디쉬맵
-//구성

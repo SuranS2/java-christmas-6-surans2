@@ -1,4 +1,4 @@
-package christmas.menu;
+package christmas.Menu;
 
 public enum Dessert {
     DESSERT_CAKE("초코케이크", 15_000, 1),

@@ -1,4 +1,4 @@
-package christmas.menu;
+package christmas.Menu;
 
 public abstract class MenuInterface {
     private final String foodName;
