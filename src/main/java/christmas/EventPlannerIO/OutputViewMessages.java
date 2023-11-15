@@ -18,7 +18,7 @@ public enum OutputViewMessages implements EnumMessageFormatter {
     OUTPUT_ORDER_LIST_MESSAGE("<주문 메뉴>"),
     OUTPUT_ORDER_LIST_EACH("%s %d개"),
     OUTPUT_RECEIPT_BEFORE_DISCOUNT_MESSAGE("<할인 전 총주문 금액>"),
-    OUTPUT_RECEIPT_BEFORE_DISCOUNT_PRICE("%,d%원"),
+    OUTPUT_RECEIPT_BEFORE_DISCOUNT_PRICE("%,d원"),
     OUTPUT_SERVICE_MENU_MESSAGE("<증정 메뉴>"),
     OUTPUT_SERVICE_LIST("%s %d개"),
     OUTPUT_CHRISTMAS_DISCOUNT_MESSAGE("크리스마스 디데이 할인"),
