@@ -6,10 +6,15 @@ import static christmas.Menu.MainDish.*;
 import static christmas.Menu.Dessert.*;
 import static christmas.Menu.Drink.*;
 
+import christmas.Menu.Drink;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.IllegalFormatWidthException;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputViewValidator {
 
@@ -44,6 +49,8 @@ public class InputViewValidator {
         return INPUT_MENU_FORMAT;
     }
 
+
+
     public void validateMenu(String menu) {
 
 //view 검증 , 메뉴의 개수는 1 이상의 숫자, 메뉴 형식 따라야함
@@ -52,6 +59,53 @@ public class InputViewValidator {
                     + OUTPUT_ERROR_SPACE.getErrorMessage()
                     + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
 
+        }
+    }
+    public void validateOnlyDrink(List<String> menuNames, List<String> drinkList) {
+        menuNames.removeAll(drinkList);
+        // != 연산부분 포장해서 true값으로 작업할것?
+        if (menuNames.isEmpty()) {
+            throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
+                    + OUTPUT_ERROR_SPACE.getErrorMessage()
+                    + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
+        }
+    }
+
+    public void validateNotInMenu(List<String> menuNames, List<String> appetizerList, List<String> mainList,
+                                  List<String> dessertList, List<String> drinkList) {
+        List<String> allMenu = new ArrayList<>();
+        allMenu.addAll(appetizerList);
+        allMenu.addAll(mainList);
+        allMenu.addAll(dessertList);
+        allMenu.addAll(drinkList);
+        if (!allMenu.contains(menuNames)) {
+            throw new IllegalStateException(OUTPUT_ERROR.getErrorMessage()
+                    + OUTPUT_ERROR_SPACE.getErrorMessage()
+                    + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
+
+        }
+    }
+
+
+    public void validateMenuDuplicate(List<String> menuNames) {
+        //형변환
+        Set<String> checkDuplicateMenu = new HashSet<>(menuNames);
+        if (menuNames.size() != checkDuplicateMenu.size()) {
+            throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
+                    + OUTPUT_ERROR_SPACE.getErrorMessage()
+                    + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
+        }
+    }
+
+
+    private final int LIMIT_MENU_NUMBERS = 20;
+
+    public void validateMenuCount(List<Integer> menuCount) {
+        //형변환
+        if (menuCount.stream().mapToInt(Integer::intValue).sum() > 20) {
+            throw new IllegalArgumentException(OUTPUT_ERROR.getErrorMessage()
+                    + OUTPUT_ERROR_SPACE.getErrorMessage()
+                    + OUTPUT_ERROR_NOTVALIDMENU.getErrorMessage());
         }
     }
 

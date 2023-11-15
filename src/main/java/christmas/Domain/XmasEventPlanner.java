@@ -7,6 +7,7 @@ import christmas.Menu.Dessert;
 import christmas.Menu.Drink;
 import christmas.Menu.MainDish;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,8 @@ public class XmasEventPlanner {
     // 드링크맵
     // 메인디쉬맵
     //LIST로 박아버리자
-    private final Map<Appetizer,Integer> appetizerIntegerMap=  new EnumMap<>(Appetizer.class);
-    private final Map<MainDish,Integer> mainDishIntegerMap=  new EnumMap<>(MainDish.class);
-    private final Map<Dessert,Integer> dessertIntegerMap=  new EnumMap<>(Dessert.class);
-    private final Map<Drink,Integer> drinkIntegerMap=  new EnumMap<>(Drink.class);
-    private final List<Map> menuItems =  new ArrayList<>();
+
+
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -36,24 +34,27 @@ public class XmasEventPlanner {
     public XmasEventPlanner(){
         this.inputView = new InputView();
         this.outputView = new OutputView();
-        menuItems.add(appetizerIntegerMap);
-        menuItems.add(mainDishIntegerMap);
-        menuItems.add(dessertIntegerMap);
-        menuItems.add(drinkIntegerMap);
         start();
         stop();
     }
 
     private void start(){
+
 //        TestCode();
         outputView.printWelcomeMessage();
         outputView.printAskVisitDate();
         int date = inputView.readDate();
+
         outputView.printAskMenu();
-        List<String> menu = inputView.readMenu();
-        outputView.printMenu(date);;
+        Map<String,Integer> menu = inputView.readMenu();
+        outputView.printMenu(date);
+        System.out.println(menu);
 
     }
+
+
+
+
     //입력값 검증 끝나면 stop
     private void stop(){
 
