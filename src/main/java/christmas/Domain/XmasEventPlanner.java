@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class XmasEventPlanner {
+<<<<<<< HEAD
     //박민지님
     //박재홍님
     //이낙헌
@@ -52,6 +53,9 @@ public class XmasEventPlanner {
 //        private final Menu menu;
 //        private final int amount;
     //일급컬렉션
+=======
+
+>>>>>>> origin/codereview2
 
     private final InputView inputView;
     private final OutputView outputView;
